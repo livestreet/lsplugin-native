@@ -12,7 +12,9 @@ ls.plugin.native = (function ($) {
 		if (ls.registry.get('user_is_authorization')) {
 			return false;
 		}
-		ls.comments.toggleCommentForm(0);
+		if (!$('#reply').is(':visible')) {
+			ls.comments.toggleCommentForm(0);
+		}
 
 		$.each($('ul.comment-info'),function(k,v){
 			var id=$(v).parent().attr('id').replace('comment_id_','');
@@ -21,10 +23,12 @@ ls.plugin.native = (function ($) {
 			);
 		});
 
-		ls.hook.inject([ls.vote,'vote'], 'if (!ls.plugin.native.checkVote()) { return false; }','voteBefore');
+		ls.hook.inject([ls.vote,'vote'], 'if (!ls.plugin.native.checkAuthorization()) { return false; }','voteBefore');
+		ls.hook.inject([ls.favourite,'toggle'], 'if (!ls.plugin.native.checkAuthorization()) { return false; }','toggleBefore');
+		ls.hook.inject([ls.poll,'vote'], 'if (!ls.plugin.native.checkAuthorization()) { return false; }','voteBefore');
 	};
 
-	this.checkVote = function() {
+	this.checkAuthorization = function() {
 		if (ls.registry.get('user_is_authorization')) {
 			return true;
 		}
