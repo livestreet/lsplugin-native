@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+	<name>
+		<lang name="default">Native</lang>
+	</name>
+	<author>
+		<lang name="default">LiveStreet Developers Team</lang>
+	</author>
+	<homepage>http://livestreetcms.com</homepage>
+	<settings></settings>
+	<version>1.0</version>
+	<requires>
+		<livestreet>1.*</livestreet>
+		<plugins>
+
+		</plugins>
+	</requires>
+	<description>
+		<lang name="default">Более лояльное отношение к неавторизованным пользователям сайта</lang>
+	</description>
+</plugin>
