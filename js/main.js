@@ -5,7 +5,11 @@ ls.plugin = ls.plugin || {};
 ls.plugin.native = (function ($) {
 
 	this.options = {
-
+		type: {
+			topic: {
+				url_add_comment: 		aRouter.blog+'addcomment/'
+			}
+		}
 	};
 
 	this.init = function() {
@@ -37,6 +41,10 @@ ls.plugin.native = (function ($) {
 	};
 
 	this.addComment = function(formObj, targetId, targetType) {
+		if (!this.options.type[targetType]) {
+			return ls.comments.add(formObj, targetId, targetType);
+		}
+
 		if (this.options.wysiwyg) {
 			$('#'+formObj+' textarea').val(tinyMCE.activeEditor.getContent());
 		}
@@ -45,7 +53,7 @@ ls.plugin.native = (function ($) {
 		var url = aRouter['ajax']+'native/request/save/';
 		var params = formObj.serializeJSON();
 		//params.sRequestSavePath=document.location.href;
-		params.sRequestSavePath=aRouter['blog']+'addcomment/';
+		params.sRequestSavePath=this.options.type[targetType].url_add_comment;
 		params.submit_comment=1;
 		ls.hook.marker('addCommentBefore');
 		ls.ajax(url, params, function(result) {
