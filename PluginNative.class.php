@@ -40,7 +40,7 @@ class PluginNative extends Plugin {
 	 * Инициализация плагина
 	 */
 	public function Init() {
-		$this->Viewer_AppendScript(Plugin::GetWebPath(__CLASS__) . 'js/main.js');
+		$this->Viewer_AppendScript(Plugin::GetWebPath(__CLASS__) . 'js/main.js?v=1.2.1');
 	}
 }
 ?>

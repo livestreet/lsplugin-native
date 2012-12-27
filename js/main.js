@@ -17,7 +17,7 @@ ls.plugin.native = (function ($) {
 			return false;
 		}
 		if (!$('#reply').is(':visible')) {
-			ls.comments.toggleCommentForm(0);
+			ls.comments.toggleCommentForm(0,true);
 		}
 
 		$.each($('ul.comment-info'),function(k,v){
