@@ -21,10 +21,13 @@ ls.plugin.native = (function ($) {
 		}
 
 		$.each($('ul.comment-info'),function(k,v){
-			var id=$(v).parent().attr('id').replace('comment_id_','');
-			$(v).append(
-				'<li><a href="#" onclick="ls.comments.toggleCommentForm('+id+'); return false;" class="reply-link link-dotted">'+ls.lang.get('comment_answer')+'</a></li>'
-			);
+			var id=$(v).parent().attr('id');
+			if (id) {
+				id=id.replace('comment_id_','');
+				$(v).append(
+					'<li><a href="#" onclick="ls.comments.toggleCommentForm('+id+'); return false;" class="reply-link link-dotted">'+ls.lang.get('comment_answer')+'</a></li>'
+				);
+			}
 		});
 
 		ls.hook.inject([ls.vote,'vote'], 'if (!ls.plugin.native.checkAuthorization()) { return false; }','voteBefore');
